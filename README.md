@@ -14,3 +14,7 @@ To construct our model, we have to follow the following sections
 ### -> Find the three most pertinent chunks to the user's question 
 ### -> Ask LLM to rank three chunks
 ### -> Answer the question based on the nearest choice (ranked first)
+
+
+
+# Codes will be added as soon as possible
