@@ -82,10 +82,43 @@ LLM = ChatOllama(model="llama3.1", Temperature=0.7,do_sample=True)
 I've utilized the following steps to set the roles:
 ```python
 prompt=ChatPromptTemplate.from_messages([
-    ('system','You are an AI assistant, which refine the orders of similarity search from FAISS database and provide no more than 220 tokens whey write a response to a question'),
+    ('system','You are an AI assistant, which refines the orders of similarity search from FAISS database and provides no more than 220 tokens when writing a response to a question'),
     ('user','{text}')
 ])
 ```
+### Define the Chain
+When we set our ```LLM``` model and its relevant ```prompt```, we can bring these information together as a ```chain``` by
+```python
+ChainLLama31=prompt|LLM|StrOutputParser()
+```
+where ```StrOutputParser()``` makes the result be expressed as a string.
+
+### Define the task
+Here, we create our question by using the previously retrieved information as follows: 
+```python
+Question = f'''
+You are given the results of a FAISS similarity search. 
+The user asked the following query:
+Query: "{Query}"
+
+Here are the retrieved results:
+Result[0]: {Results[0].page_content}
+Result[1]: {Results[1].page_content}
+Result[2]: {Results[2].page_content}
+Result[3]: {Results[3].page_content}
+Result[4]: {Results[4].page_content}
+
+Please re-order these results in order of **relevance to the user's query**,
+starting with the most relevant. 
+In your answer, you can refer to them by their original indices, e.g., Result[0],
+Result[1], etc., and optionally explain why each result is in that position.
+'''
+```
+This is because we have ```k=5``` question. 
+### Invoke the Chain
+
+
+
 
 
 
