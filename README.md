@@ -20,7 +20,7 @@ text_splitter = RecursiveCharacterTextSplitter(
 )
 chunks = text_splitter.split_documents(documents)
 ```
-
+In this text splitter, ```chunk size``` sets the maximum threshold to define a chunk; on the other hand, ```chunk overlap``` allows a sequential of chunks to have a maximum similar data to help chunks have a deliverable meaning when they are requested by a similarity measure. In this situation, we don't lose the meaning behind the texts. In addition, separators help  
 ## Embedding and FIASS Vector store
 After splitting the information, we use an embedding tool such as ```Sentence Transformer``` to vectorize the information as follows:
 ```python
