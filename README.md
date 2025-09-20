@@ -62,8 +62,17 @@ Results = vectorstore.similarity_search(Query, k=5)
 where we search for the relevant information regarding the requested query. In this vein, we have ```k``` number of nearest meanings of the information in the database for the request query. In this example, ```Result``` gives a list of ```k=5``` members. Each list has its own document class that includes ```page_content```, ```metadata```, and so forth.
 
 ## LLM
-In this section, we want to use the previous ```k=5``` response to analyze them with an intelligent LLM (```llama3.1```).
-This is because the proposed previous five results may not be ordered in an accurate organization; therefore, an LLM can boost the results to deliver a better outcome.
+In this section, we want to use the previous ```k=5``` responses to analyze them with an intelligent LLM (```llama3.1```).
+This is because the proposed results may not be ordered in an accurate organization; therefore, an LLM can boost the results to deliver a better outcome.
+
+So, we have to define a good ```prompt```, including the fast five result from the similarity search of FAISS database, and process the information to deliver a meaningful performance.
+
+
+
+
+
+
+
 
 
 
