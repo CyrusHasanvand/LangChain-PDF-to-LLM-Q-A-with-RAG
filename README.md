@@ -67,9 +67,25 @@ This is because the proposed results may not be ordered in an accurate organizat
 
 So, we have to define a good ```prompt```, including the fast five result from the similarity search of FAISS database, and process the information to deliver a meaningful performance.
 
-
-
-
+### Define local llama3.1 from Ollama
+First, I used the following packages to call my local LLM (```llama3.1```)
+```python
+from langchain.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
+from langchain.schema import SystemMessage, HumanMessage, AIMessage, StrOutputParser
+from langchain_ollama import ChatOllama
+```
+then I define the ```LLM``` as follows:
+```python
+LLM = ChatOllama(model="llama3.1", Temperature=0.7,do_sample=True)
+```
+### Define the relevant Prompt
+I've utilized the following steps to set the roles:
+```python
+prompt=ChatPromptTemplate.from_messages([
+    ('system','You are an AI assistant, which refine the orders of similarity search from FAISS database and provide no more than 220 tokens whey write a response to a question'),
+    ('user','{text}')
+])
+```
 
 
 
