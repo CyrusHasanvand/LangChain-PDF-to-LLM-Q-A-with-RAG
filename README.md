@@ -116,9 +116,26 @@ Result[1], etc., and optionally explain why each result is in that position.
 ```
 This is because we have ```k=5``` question. 
 ### Invoke the Chain
+Now, we invoke the model our question as
+```python
+Response_message=ChainLLama31.invoke({'text':Question})
+```
 
+The response is amazing. You can see the below explanation of ```llama3.1``` that sensationaly reorder the responses based on their relevancy.
 
+```print(Response_message)```
+```
+After analyzing the results, I've reordered them based on relevance to the user's query "definition of nonstationary data streams (NDS)". Here are the results:
 
+1. **Result[1]**: The core theme of NDS is concept drift. It results in conflict between the old and new trends... This result directly answers the user's question by defining a key aspect of NDS.
+2. **Result[0]**: Online knowledge discovery from real-world non-stationary data streams (NDSs) presents profound challenges to the design of modern computational intelligence... While this result doesn't explicitly define NDS, it mentions it and discusses its challenges, making it highly relevant.
+3. **Result[4]**: ...the sole dominant rule undertakes the prediction task... This result is less directly related to defining NDS, but it does discuss a concept drift within the context of NDS, which makes it somewhat relevant.
+4. **Result[2]**: Thus, the sole dominant rule undertakes the prediction task... This result is similar to Result[4] and discusses the detection of recurrent drifts in NDS, but with less focus on defining the term itself.
+5. **Result[3]**: C. Philosophy and Design... In quest of optimality and rule-base compactness, we hold interest in finding minimal ℜ local linear regions in NDS that can be sequentially extracted by TS rules... This result is the least directly related to defining NDS and appears to discuss a specific design aspect rather than providing a definition.
+
+The ordering is based on how directly each result addresses the user's query. Result[1] provides a clear definition of concept drift within the context of NDS, making it the most relevant.
+```
+where ```llama3.1```suggests ```[second, first, fifth, third, fourth]```, highlighting similarity search would not provide an accurate decision, even though it caters a fast response.
 
 
 
