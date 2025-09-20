@@ -29,6 +29,51 @@ embedding_model = SentenceTransformerEmbeddings(model_name="all-mpnet-base-v2")
 # Create FAISS vector store
 vectorstore = FAISS.from_documents(chunks, embedding=embedding_model)
 ```
+Now, we create our vectorstore. Then, we need to save this database.
+
+## Save the FAISS
+In comparison to ChromaDB, which can save the database automatically, we need to save FAISS database manually. Therefore, we have
+
+```python
+if os.path.exists(FAISS_Path):
+    shutil.rmtree(FAISS_Path)       # Delete the folder and its contents
+os.makedirs(FAISS_Path, exist_ok=True) # Re-create the folder
+
+# Save index
+index_path = os.path.join(FAISS_Path, "index.faiss")
+faiss.write_index(vectorstore.index, index_path)
+
+# Save documents and embeddings separately
+store_path = os.path.join(FAISS_Path, "store.pkl")
+with open(store_path, "wb") as f:
+    pickle.dump(vectorstore, f)
+
+print(f"Saved {len(chunks)} chunks to {FAISS_Path}")
+```
+Now, the database is created, and we can simply search through this database to find the relevant information by similarity search.
+
+## Similarity Search in FAISS Database
+When we created our database, which includes several chunks, we can search through the database by asking our question.
+To do this, we have
+```python
+Query="definition of nonstationary data streams (NDS)"
+results = vectorstore.similarity_search(Query, k=5)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
